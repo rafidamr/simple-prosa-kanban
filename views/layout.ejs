@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prosa Kanban Board</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js"></script>
+  <script src="/jkanban/jkanban.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+    @import url("/jkanban/jkanban.css");
+    @import url("/popup/popup.css");
+    @import url("/main.css");
+
+    body {
+      font-family: "Roboto";
+      margin:0;
+      padding: 0;
+    }
+    
+    #myKanban {
+      overflow-x: auto;
+    }
+
+    .success {
+      background: #00B961;
+      color:#fff
+    }
+    
+    .info {
+      background: #2A92BF;
+      color:#fff
+    }
+    
+    .warning{
+      background: #F4CE46;
+      color:#fff
+    }
+    
+    .error{
+      background: #FB7D44;
+      color:#fff
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="form-header">
+
+</div>
+<%- body %>
+</body>
+</html>

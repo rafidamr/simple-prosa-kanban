@@ -1,0 +1,174 @@
+<div class="body-blackout"></div>
+
+<div 
+  class="popup-modal shadow" 
+  data-popup-modal="_backlog">
+  <i class="popup-modal__close"></i>
+  <h1 class="font-weight-bold">
+    New Task
+  </h1>
+  <input id="name">
+  <input id="tags">
+  <input id="assignee">
+  <input id="start">
+  <input id="end">
+  <button id="popup-modal-button">Add</button>
+</div>
+
+<div class="container-fluid">
+  <div class="left-bar">
+     <div></div>
+  </div>
+  <div class="central-board">
+    <div class="top-bar">
+      <img src="https://media-exp1.licdn.com/dms/image/C510BAQFACMedGj9Sog/company-logo_200_200/0?e=2159024400&v=beta&t=FyjT0QYjkG8Frc-hoR7n3YnSpYxnlBOXAKlLftxffrQ" id="logo">
+      <div id="bar-title">Kanban Prosa</div>
+    </div>
+    <div id="myKanban"></div>
+  </div>
+</div>
+
+<script>
+var reformatItems = () => {
+    var items = document.getElementsByClassName('kanban-item')
+    for(item of items) {
+        var id = item.getAttribute("data-eid")
+        name = item.getAttribute("data-name")
+        tags = item.getAttribute("data-tags")
+        assignee = item.getAttribute("data-assignee")
+        now = new Date().getTime()
+        end = (new Date(item.getAttribute("data-end"))).getTime()
+        deadline = Math.round((end-now)/1000/60/60/24)
+        item.innerHTML = `<b>${name}</b><br>${assignee}<br>${tags}<br>${deadline}<button id="delete-item-${id}" data-itemId=${id}>x</button>`
+    }
+}
+
+var sendRequest = (data, endpoint) => {
+    $.ajax({
+      url: `http://35.240.215.208:3000/${endpoint}`,
+      type:"POST",
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(function (data) {
+      console.log(data)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert(errorThrown)
+      console.log(errorThrown)
+    })
+}
+
+var initDeleteListener = (boards) => {
+    var ids = [... boards.getBoardElements('_backlog'), ... boards.getBoardElements('_todo'), ... boards.getBoardElements('_done')].map(b => b.dataset.eid)
+    for(let id of ids) {
+      document.getElementById(`delete-item-${id}`).addEventListener('click', () => {
+        var boardId = boards.findElement(id).parentElement.parentElement.dataset.id
+        boards.removeElement(id)
+        sendRequest({
+          "item-id" : id,
+          "board-id" : boardId
+        }, "delete")
+      })
+    }
+}
+
+var parsed_boards = []
+<% for(board of JSON.parse(boards)){ %>
+    var temp = {
+        "id" : "<%= board.id %>",
+        "title": "<%= board.title %>",
+        "item": []
+    }
+    <% for(i = 0; i < board.item.length ; i++){ %>
+        temp.item.push({
+            "id" : "<%= board.item[i].id %>",
+            "name" : "<%= board.item[i].name %>",
+            "assignee" : "<%= board.item[i].assignee %>",
+            "tags" : "<%= board.item[i].tags %>",
+            "start" : "<%= board.item[i].start %>",
+            "end" : "<%= board.item[i].end %>"
+        })
+    <% } %>
+    parsed_boards.push(temp)
+<% } %>
+
+var KanbanProsa = new jKanban({
+    element         : '#myKanban',
+    gutter          : '10px',
+    addItemButton   : true,
+    buttonContent   : `+ Add Task`,
+    click           : function(el){
+        // alert(el.dataset.eid)
+    },
+    dropEl          : function (el, target, source, sibling) {
+        sendRequest({
+          "item-id"      : el.dataset.eid,
+          "btarget-id"   : target.parentElement.dataset.id,
+          "bsource-id"   : source.parentElement.dataset.id,
+          "btarget-items": [... target.children].map(c => {
+                              let child = Object.assign({}, c.dataset)
+                              child.id = child.eid
+                              delete child.eid
+                              return child
+                           })
+        }, "update")
+    },
+    buttonClick     : function(el, boardId) {
+        const bodyBlackout = document.querySelector('.body-blackout')
+        const popupModal = document.querySelector('.popup-modal')
+        const modalButton = document.getElementById('popup-modal-button')
+
+        var modalListener = () => {
+            popupModal.classList.remove('is--visible')
+            bodyBlackout.classList.remove('is-blacked-out')
+            itemId = (new Date()).getTime()
+
+            KanbanProsa.addElement(
+                boardId,
+                {
+                    "id" : itemId,
+                    "name" : document.getElementById('name').value,
+                    "assignee" : document.getElementById('assignee').value,
+                    "tags" : document.getElementById('tags').value,
+                    "start" : document.getElementById('start').value,
+                    "end" : document.getElementById('end').value
+                }
+            )
+            items = [... KanbanProsa.findBoard(boardId).children[1].children].map(c => {
+              let child = Object.assign({}, c.dataset)
+              child.id = child.eid
+              delete child.eid
+              return child
+            })
+            sendRequest({
+              "board-id"  : boardId,
+              "board-items"   : items
+            }, "create")
+
+            reformatItems()
+            modalButton.removeEventListener('click', modalListener)
+        }
+
+        popupModal.classList.add('is--visible')
+        bodyBlackout.classList.add('is-blacked-out')
+
+        popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
+           popupModal.classList.remove('is--visible')
+           bodyBlackout.classList.remove('is-blacked-out')
+        })
+
+        bodyBlackout.addEventListener('click', () => {
+          popupModal.classList.remove('is--visible')
+          bodyBlackout.classList.remove('is-blacked-out')
+          modalButton.removeEventListener('click', modalListener)
+        })
+
+        modalButton.addEventListener('click', modalListener)
+    },
+    boards  : parsed_boards
+});
+
+reformatItems()
+initDeleteListener(KanbanProsa)
+
+</script>
+</body>

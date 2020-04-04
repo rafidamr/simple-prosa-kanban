@@ -1,0 +1,61 @@
+[
+        {
+            "id" : "_backlog",
+            "title"  : "Backlog",
+            "item"  : [
+                {
+                    "id":"task-1",
+                    "name":"Location based authorization",
+                    "assignee":"Brent",
+                    "tags":"backend",
+                    "start":"02/10/2019",
+                    "end":"04/20/2020 23:00 GMT+7"
+                },
+                {
+                    "id":"task-2",
+                    "name":"Media filtering",
+                    "assignee":"Sultan",
+                    "tags":"frontend",
+                    "start":"02/10/2019",
+                    "end":"04/20/2020 23:00 GMT+7"
+                }
+            ]
+        },
+        {
+            "id" : "_todo",
+            "title"  : "To Do",
+            "item"  : [
+                {
+                    "id":"task-3",
+                    "name":"Research on competitor",
+                    "assignee":"K Komrade",
+                    "tags":"data scientist",
+                    "start":"02/10/2019",
+                    "end":"04/20/2020 23:00 GMT+7"
+                }
+            ]
+        },
+        {
+            "id" : "_done",
+            "dragTo" : ["_todo"],
+            "title"  : "Done",
+            "item"  : [
+                {
+                    "id":"task-4",
+                    "name":"Debugging on dashboard",
+                    "assignee":"Wan E",
+                    "tags":"backend",
+                    "start":"02/10/2019",
+                    "end":"04/20/2020 23:00 GMT+7"
+                },
+                {
+                    "id":"task-5",
+                    "name":"Mobile synchronization",
+                    "assignee":"Lily Y",
+                    "tags":"frontend",
+                    "start":"02/10/2019",
+                    "end":"04/20/2020 23:00 GMT+7"
+                }
+            ]
+        }
+    ]

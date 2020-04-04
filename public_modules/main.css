@@ -1,0 +1,49 @@
+.container-fluid {
+  position:absolute; 
+  display:flex;
+  flex-direction: row; 
+  height:100%; 
+  width:100%; 
+  top:0px; 
+  left:0px;
+  z-index:-1;  
+}
+
+.left-bar {
+  background-color: #4DB6AC;
+  color: white;
+  width: 17%;
+}
+
+.central-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 83%;
+  height: 100%;
+  padding-left: 2%;
+}
+
+.top-bar {
+  display: flex;
+  color: black;
+  height: 20%;
+  padding-bottom: 1rem;
+}
+
+#logo, #bar-title {
+  max-height: 3.5rem;
+  margin: auto 1% auto 0px;
+}
+
+#bar-title {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+#myKanban {
+  padding: 10px;
+	height: 80%;
+  font-weight: 400;
+  font-size: 14px;
+}
