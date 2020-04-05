@@ -13,6 +13,8 @@
   background-color: #4DB6AC;
   color: white;
   width: 18.5%;
+  font-size: 0.9rem;
+  padding: 1.5rem;
 }
 
 .central-board {
@@ -33,21 +35,108 @@
   width: 100%;
 }
 
-.left-top-bar, .right-top-bar {
-  display: flex;
-  width: 30%;
+#search {
+  margin: auto 0rem auto 3rem;
+  width: 8rem;
+  background: #4DB6AC;
+  color: #fff;
+  border: none;
+  border-bottom: 0.05rem solid #fff;
+  outline: none;
+}
+
+#search::placeholder {
+  color: #fff;
 }
 
 .profile {
   display: flex;
+  margin-top: 3.5rem;
 }
 
 .profile-icon {
-  height: 3rem;
-  width: 3rem;
+  height: 3.5rem;
+  width: 3.5rem;
   object-fit: cover;
   border-radius: 50%;
-  margin: auto;
+  margin: auto 0px auto 0.9rem;
+}
+
+.profile > div {
+  margin: auto 2rem auto 0.75rem;
+}
+
+#profile-occupation {
+  font-size: 0.75rem;
+  color: #212121;
+}
+
+.profile-task {
+  display: flex;
+}
+
+.profile-task > div {
+  padding: 1rem;
+}
+
+.task-number {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.task-status {
+  font-size: 0.75rem;
+}
+
+.menu-list {
+  padding: 1rem 1rem 0rem;
+  font-size: 0.8rem;
+}
+
+.menu-list > p {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-list-header {
+  color: #212121;
+}
+
+#menu-list-notification {
+  display: block;
+}
+
+#notification-number {
+  color: #000;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.2rem 0.15rem;
+  margin-left: 0.5rem;
+}
+
+.menu-list-etc {
+  color: #B2DFDB;
+}
+
+.menu-list-team {
+/*  display: flex;
+  justify-content: space-between;
+  align-items: center;*/
+}
+
+.member-icon-2 {
+  height: 1.25rem;
+  width: 1.25rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.left-top-bar, .right-top-bar {
+  display: flex;
+  width: 30%;
 }
 
 #logo, #bar-title, #member-number, #etc-icon {
@@ -65,7 +154,7 @@
   width: 2rem;
   object-fit: cover;
   border-radius: 50%;
-  margin: auto 2.5% auto 0px;
+  margin: auto 1.5% auto 0px;
 }
 
 #member-number {

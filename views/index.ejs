@@ -22,13 +22,55 @@
 
 <div class="container-fluid">
   <div class="left-bar">
-     <input id="search">
+     <input id="search" placeholder="Search">
+     <!-- 🔎 -->
      <div class="profile">
        <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="profile-icon">
        <div>
-         <p>Fatemeh Fairuze</p>
-         <p>Project Manager</p>
+         <span>Fatemeh Fairuze</span><br>
+         <span id="profile-occupation">Project Manager</span>
        </div>
+     </div>
+     <div class="profile-task">
+       <div>
+         <div class="task-number">9999+</div>
+         <span class="task-status">Completed Tasks</span>
+       </div>
+       <div>
+         <div class="task-number">1</div>
+         <span class="task-status">Open Task</span>
+       </div>
+     </div>
+     <div class="menu-list">
+       <p class="menu-list-header">MENU</p>
+       <p>Home</p>
+       <p>My Tasks</p>
+       <p id="menu-list-notification">Notifications <span id="notification-number">89</span> </p>
+     </div>
+     <div class="menu-list">
+       <p class="menu-list-header">TEAMS</p>
+       <p class="menu-list-team">Data Scientists
+        <span>
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+        </span>
+       </p>
+       <p class="menu-list-team">FE/BE Team
+        <span>
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+        </span>
+       </p>
+       <p class="menu-list-team">PM Team
+        <span>
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+          <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon-2">
+        </span>
+       </p>
+       <p class="menu-list-etc">+ Add a Team</p>
      </div>
   </div>
   <div class="central-board">
@@ -152,9 +194,6 @@ var KanbanProsa = new jKanban({
     gutter          : '10px',
     addItemButton   : true,
     buttonContent   : `+ Add Task`,
-    click           : function(el){
-        // alert(el.dataset.eid)
-    },
     dropEl          : function (el, target, source, sibling) {
         sendRequest({
           "item-id"      : el.dataset.eid,
