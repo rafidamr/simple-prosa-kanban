@@ -1,6 +1,6 @@
 .body-blackout {
   position: absolute;
-  z-index: 1010;
+  z-index: 5;
   left: 0;
   top: 0;
   width: 100%;
@@ -8,6 +8,7 @@
   background-color: rgba(0, 0, 0, 0.65);
   display: none;
 }
+
 .body-blackout.is-blacked-out {
   display: block;
 }
@@ -17,19 +18,21 @@
 }
 
 .popup-modal {
-  height: 20rem;
-  width: 15rem;
+  min-height: 20rem;
+  width: 14rem;
   background-color: #fff;
+  border-radius: 5px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 45px;
+  padding: 25px 35px 25px;
   opacity: 0;
   pointer-events: none;
-  transition: all 300ms ease-in-out;
-  z-index: 1011;
+  transition: all 0ms ease-in-out;
+  z-index: 6;
 }
+
 .popup-modal.is--visible {
   opacity: 1;
   pointer-events: auto;

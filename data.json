@@ -5,9 +5,9 @@
             "item"  : [
                 {
                     "id":"task-1",
-                    "name":"Location based authorization",
+                    "name":"Location based authorization on mobile",
                     "assignee":"Brent",
-                    "tags":"backend",
+                    "tags":"BACKEND",
                     "start":"02/10/2019",
                     "end":"04/20/2020 23:00 GMT+7"
                 },
@@ -15,7 +15,7 @@
                     "id":"task-2",
                     "name":"Media filtering",
                     "assignee":"Sultan",
-                    "tags":"frontend",
+                    "tags":"FRONTEND",
                     "start":"02/10/2019",
                     "end":"04/20/2020 23:00 GMT+7"
                 }
@@ -27,9 +27,9 @@
             "item"  : [
                 {
                     "id":"task-3",
-                    "name":"Research on competitor",
+                    "name":"Analyse every competitor per city",
                     "assignee":"K Komrade",
-                    "tags":"data scientist",
+                    "tags":"DATA SCIENTIST",
                     "start":"02/10/2019",
                     "end":"04/20/2020 23:00 GMT+7"
                 }
@@ -44,7 +44,7 @@
                     "id":"task-4",
                     "name":"Debugging on dashboard",
                     "assignee":"Wan E",
-                    "tags":"backend",
+                    "tags":"BACKEND",
                     "start":"02/10/2019",
                     "end":"04/20/2020 23:00 GMT+7"
                 },
@@ -52,7 +52,7 @@
                     "id":"task-5",
                     "name":"Mobile synchronization",
                     "assignee":"Lily Y",
-                    "tags":"frontend",
+                    "tags":"FRONTEND",
                     "start":"02/10/2019",
                     "end":"04/20/2020 23:00 GMT+7"
                 }

@@ -12,28 +12,47 @@
 .left-bar {
   background-color: #4DB6AC;
   color: white;
-  width: 17%;
+  width: 18.5%;
 }
 
 .central-board {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 83%;
+  width: 81.5%;
   height: 100%;
   padding-left: 2%;
 }
 
 .top-bar {
   display: flex;
+  justify-content: space-between;
   color: black;
   height: 20%;
   padding-bottom: 1rem;
+  width: 100%;
 }
 
-#logo, #bar-title {
+.left-top-bar, .right-top-bar {
+  display: flex;
+  width: 30%;
+}
+
+.profile {
+  display: flex;
+}
+
+.profile-icon {
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: auto;
+}
+
+#logo, #bar-title, #member-number, #etc-icon {
   max-height: 3.5rem;
-  margin: auto 1% auto 0px;
+  margin: auto 2.5% auto 0px;
 }
 
 #bar-title {
@@ -41,9 +60,109 @@
   font-size: 1.5rem;
 }
 
+.member-icon {
+  height: 2rem;
+  width: 2rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: auto 2.5% auto 0px;
+}
+
+#member-number {
+  font-size: 0.8rem;
+  margin-left: 3.5%;
+  background: #EEEEEE;
+  padding: 0.3rem 0.7rem;
+  border-radius: 1.3rem;
+}
+
 #myKanban {
   padding: 10px;
 	height: 80%;
   font-weight: 400;
   font-size: 14px;
+}
+
+#item-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.kanban-title-button {
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFF;
+  background: #80CBC4;
+  padding: 10px 12.5px 10px;
+  border: none;
+  border-radius: 17.5px;
+}
+
+.delete-item-button {
+  border: none;
+  border-radius: 50%;
+  padding: 2px 6px 2px;
+}
+
+.delete-item-logo {
+  width: 0.5rem;
+}
+
+#item-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+}
+
+.item-meta-1 {
+  margin-right: 5px;
+  padding: 3px 7px 3px;
+  border-radius: 5px;
+}
+
+.item-assignee {
+  background: #B2DFDB;
+}
+
+.item-tags {
+  font-weight: 700;
+  background: #E1BEE7;
+  color: #8E24AA;
+}
+
+#popup-header {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.popup-input {
+  line-height: 20px;
+  width: 93.5%;
+  margin: 0.25rem auto 0.75rem;
+  padding: 0.4rem;
+  border: 0.75px solid #80CBC4;
+  border-radius: 5px;
+  font-family: "Roboto";
+  font-size: 0.75rem;
+}
+
+.popup-label {
+  font-size: 0.8rem;
+}
+
+#popup-modal-button {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFF;
+  background: #80CBC4;
+  padding: 10px 12.5px 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.button-container {
+  text-align: center;
 }

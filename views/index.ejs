@@ -1,28 +1,48 @@
 <div class="body-blackout"></div>
 
-<div 
-  class="popup-modal shadow" 
-  data-popup-modal="_backlog">
-  <i class="popup-modal__close"></i>
-  <h1 class="font-weight-bold">
-    New Task
-  </h1>
-  <input id="name">
-  <input id="tags">
-  <input id="assignee">
-  <input id="start">
-  <input id="end">
-  <button id="popup-modal-button">Add</button>
+<div class="popup-modal shadow">
+  <div>
+    <i class="popup-modal__close"></i>
+    <div id="popup-header">New Task</div>
+    <span class="popup-label">Title</span>
+    <input class="popup-input" id="name" placeholder="Ex: Create Baghdad online library">
+    <span class="popup-label">Tags</span>
+    <input class="popup-input" id="tags" placeholder="Ex: BACKEND">
+    <span class="popup-label">Assignee</span>
+    <input class="popup-input" id="assignee" placeholder="Ex: Al Khwarizmi" ">
+    <span class="popup-label">Start Date</span>
+    <input class="popup-input" id="start" placeholder="Ex: 05/20/2020 23:59:59 GMT+7">
+    <span class="popup-label">End Date</span>
+    <input class="popup-input" id="end" placeholder="Ex: 05/20/2020 23:59:59 GMT+7">
+  </div>
+  <div class="button-container">
+    <button id="popup-modal-button">Add</button>
+  </div>
 </div>
 
 <div class="container-fluid">
   <div class="left-bar">
-     <div></div>
+     <input id="search">
+     <div class="profile">
+       <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="profile-icon">
+       <div>
+         <p>Fatemeh Fairuze</p>
+         <p>Project Manager</p>
+       </div>
+     </div>
   </div>
   <div class="central-board">
     <div class="top-bar">
-      <img src="https://media-exp1.licdn.com/dms/image/C510BAQFACMedGj9Sog/company-logo_200_200/0?e=2159024400&v=beta&t=FyjT0QYjkG8Frc-hoR7n3YnSpYxnlBOXAKlLftxffrQ" id="logo">
-      <div id="bar-title">Kanban Prosa</div>
+      <div class="left-top-bar">
+        <img src="https://media-exp1.licdn.com/dms/image/C510BAQFACMedGj9Sog/company-logo_200_200/0?e=2159024400&v=beta&t=FyjT0QYjkG8Frc-hoR7n3YnSpYxnlBOXAKlLftxffrQ" id="logo">
+        <div id="bar-title">Kanban Prosa</div>
+      </div>
+    <div class="right-top-bar">
+      <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon">
+      <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon">
+      <img src="https://images.unsplash.com/photo-1581711966454-64163c64fd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="member-icon">
+      <div id="member-number">1000+ Members</div>
+    </div>
     </div>
     <div id="myKanban"></div>
   </div>
@@ -35,11 +55,46 @@ var reformatItems = () => {
         var id = item.getAttribute("data-eid")
         name = item.getAttribute("data-name")
         tags = item.getAttribute("data-tags")
-        assignee = item.getAttribute("data-assignee")
+        assignee = item.getAttribute("data-assignee").split(' ').map(w => w[0]).join('')
         now = new Date().getTime()
         end = (new Date(item.getAttribute("data-end"))).getTime()
         deadline = Math.round((end-now)/1000/60/60/24)
-        item.innerHTML = `<b>${name}</b><br>${assignee}<br>${tags}<br>${deadline}<button id="delete-item-${id}" data-itemId=${id}>x</button>`
+        item.innerHTML = `
+          <div id="item-header">
+            <b>${name}</b>
+            <div>
+              <button class="delete-item-button" id="delete-item-${id}" data-itemId=${id}>
+              <img class="delete-item-logo" src="https://b1.pngbarn.com/png/234/595/black-resourcesforbitches-black-x-png-clip-art-thumbnail.png"
+              </button>
+            </div>
+          </div>
+          <div id="item-meta">
+            <div>
+              <span class="item-meta-1 item-assignee">${assignee}</span>
+              <span class="item-meta-1 item-tags">${tags}</span>
+            </div>
+            <span>${deadline} day(s)</span>
+          </div>`
+    }
+    for(item of document.getElementsByClassName("item-tags")){
+      switch(item.innerText){
+        case "BACKEND":
+          item.style.background = "#FFCDD2"
+          item.style.color = "#E53935"
+          break
+        case "FRONTEND":
+          item.style.background = "#FFE0B2"
+          item.style.color = "#FB8C00"
+          break
+        case "DATA SCIENTIST":
+          item.style.background = "#BBDEFB"
+          item.style.color = "#1E88E5"
+          break
+        default:
+          item.style.background = "#E1BEE7"
+          item.style.color = "#8E24AA"
+          break
+      }
     }
 }
 
@@ -62,6 +117,7 @@ var initDeleteListener = (boards) => {
     for(let id of ids) {
       document.getElementById(`delete-item-${id}`).addEventListener('click', () => {
         var boardId = boards.findElement(id).parentElement.parentElement.dataset.id
+        console.log(boardId)
         boards.removeElement(id)
         sendRequest({
           "item-id" : id,
@@ -145,6 +201,7 @@ var KanbanProsa = new jKanban({
             }, "create")
 
             reformatItems()
+            initDeleteListener(KanbanProsa)
             modalButton.removeEventListener('click', modalListener)
         }
 
